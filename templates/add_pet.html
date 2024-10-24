@@ -1,23 +1,15 @@
-{% extends 'layout.html' %}
+@app.route('/add', methods=['GET', 'POST'])
+def add_pet():
+    if request.method == 'POST':
+        name = request.form['name']
+        species = request.form['species']
+        age = request.form.get('age', type=int)  # Get age as integer
+        owner = request.form.get('owner')
+        description = request.form.get('description')
 
-{% block content %}
-    <h2 class="mt-4">Add a New Pet</h2>
-    <form method="POST">
-        <label for="name">Name:</label>
-    <input type="text" name="name" required>
+        new_pet = Pet(name=name, species=species, age=age, owner=owner, description=description)
+        db.session.add(new_pet)
+        db.session.commit()
+        return redirect(url_for('index'))
 
-    <label for="species">Species:</label>
-    <input type="text" name="species" required>
-
-    <label for="age">Age:</label>
-    <input type="number" name="age">
-
-    <label for="owner">Owner:</label>
-    <input type="text" name="owner">
-
-    <label for="description">Description:</label>
-    <textarea name="description"></textarea>
-
-    <button type="submit">Add Pet</button>
-    </form>
-{% endblock %}
+    return render_template('add_pet.html')
