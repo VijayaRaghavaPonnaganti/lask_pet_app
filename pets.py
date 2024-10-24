@@ -18,9 +18,11 @@ CREATE TABLE IF NOT EXISTS pets (
 )
 ''')
 pets_to_insert = [
-    ('Buddy', 'Dog', 3, 'John Doe', 'Friendly and playful.'),
-    ('Whiskers', 'Cat', 2, 'Jane Smith', 'Loves to nap in the sun.'),
-    ('Goldie', 'Fish', 1, 'Tom Brown', 'Bright and energetic.'),
+    ('Raja', 'Indian Pariah Dog', 3, 'Amit Sharma', 'Loyal and protective.'),
+    ('Rani', 'Rajapalayam', 2, 'Anjali Mehta', 'Calm and friendly.'),
+    ('Sheru', 'Gaddi Dog', 5, 'Rajesh Kumar', 'Brave and intelligent.'),
+    ('Tuffy', 'Kanni', 4, 'Sita Iyer', 'Fast and agile.'),
+    ('Bholu', 'Chippiparai', 3, 'Priya Singh', 'Energetic and alert.'),
 ]
 
 # Execute insert statements
@@ -28,9 +30,14 @@ cursor.executemany('''
 INSERT INTO pets (name, species, age, owner, description)
 VALUES (?, ?, ?, ?, ?)
 ''', pets_to_insert)
+cursor.execute('SELECT * FROM pets')
+
+# Fetch all rows from the result
+rows = cursor.fetchall()
+for row in rows:
+    print(row)
 
 # Commit the changes and close the connection
 conn.commit()
 conn.close()
 
-print("Pets table created successfully!")
