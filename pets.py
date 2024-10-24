@@ -1,11 +1,8 @@
-from app import db1, Pet 
-#inserting some pets
-petA = Pet(name="A",species="RAT", age=1)
-petB = Pet(name="B",species="PANDA",age=7)
-petC = Pet(name="C",species="CAT",age=4)
+import os
+from your_application import db  # Adjust the import based on your file structure
 
-db1.session.add(petA)
-db1.session.add(petB)
-db1.session.add(petC)
+if os.path.exists('pets.db'):
+    os.remove('pets.db')  # Remove the old database
 
-db.session.commit()
+with app.app_context():
+    db.create_all()  # Create the database and tables with the new structure
