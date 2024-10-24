@@ -16,9 +16,12 @@ class Pet(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), nullable=False)
     species = db.Column(db.String(50), nullable=False)
+    age = db.Column(db.Integer, nullable=True)  # Optional age field
+    owner = db.Column(db.String(50), nullable=True)  # Optional owner field
+    description = db.Column(db.String(200), nullable=True)  # Optional description field
 
     def __repr__(self):
-        return f'<Pet {self.name}>'
+        return f'<Pet {self.name}, Species: {self.species}>'
 
 # Route to display all pets
 @app.route('/')
